@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface UserDaoInter {
     List<User> getAll();
+
     User getById(int userId);
+
     boolean addUser(User u);
 
     boolean updateUser(User u);
