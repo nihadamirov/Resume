@@ -1,9 +1,9 @@
 package com.company.daoimpl;
 
-import com.company.bean.Nationality;
-import com.company.bean.User;
 import com.company.dao.AbstractDAO;
 import com.company.dao.UserDaoInter;
+import com.company.entity.Country;
+import com.company.entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,21 +28,22 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         String birthplaceStr = rs.getString("birthplace");
         Date birthdate = rs.getDate("birthdate");
 
-        Nationality nationality = new Nationality(nationalityId, nationalityStr, null);
-        Nationality birthplace = new Nationality(birthplaceId, birthplaceStr, null);
+        Country nationality = new Country(nationalityId, null, nationalityStr);
+        Country birthplace = new Country(birthplaceId, birthplaceStr, null);
 
         return new User(id, name, surname, email, phone, birthdate, nationality, birthplace);
     }
+
 
     @Override
     public List<User> getAll() {
         List<User> result = new ArrayList<>();
         try (Connection c = connect()) {
             Statement stmt = c.createStatement();
-            stmt.execute("SELECT u.*, b.country_name AS birthplace, n.name AS nationality "
+            stmt.execute("SELECT u.*, b.name AS birthplace, n.nationality "
                     + "\nFROM user AS u "
-                    + "\nINNER JOIN nationality AS n ON u.nationality_id = n.id "
-                    + "\nINNER JOIN nationality AS b ON u.birthplace_id = b.id;");
+                    + "\nINNER JOIN country AS n ON u.nationality_id = n.id "
+                    + "\nINNER JOIN country AS b ON u.birthplace_id = b.id;");
             ResultSet rs = stmt.getResultSet();
 
             while (rs.next()) {
@@ -60,10 +61,10 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         User result = null;
         try (Connection c = connect()) {
             Statement stmt = c.createStatement();
-            stmt.execute("SELECT u.*, b.country_name AS birthplace, n.name AS nationality "
+            stmt.execute("SELECT u.*, b.name AS birthplace, n.nationality "
                     + "FROM user AS u"
-                    + "INNER JOIN nationality AS n ON u.nationality_id = n.id"
-                    + "INNER JOIN nationality AS b ON u.birthplace_id = b.id where u.id=" + userId);
+                    + "INNER JOIN country AS n ON u.nationality_id = n.id"
+                    + "INNER JOIN country AS b ON u.birthplace_id = b.id where u.id=" + userId);
             ResultSet rs = stmt.getResultSet();
 
             while (rs.next()) {

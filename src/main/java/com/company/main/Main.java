@@ -1,11 +1,12 @@
 package com.company.main;
 
 import com.company.dao.UserDaoInter;
+import com.company.dao.UserSkillDaoInter;
 import com.company.daoimpl.UserDaoImpl;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        UserDaoInter userDao = new UserDaoImpl();
-        System.out.println(userDao.getAll());
+        UserSkillDaoInter skillDao = Context.instanceSkillDao();
+        System.out.println(skillDao.getAllSkillByUserId(1));
     }
 }

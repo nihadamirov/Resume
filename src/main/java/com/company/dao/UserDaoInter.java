@@ -1,6 +1,7 @@
 package com.company.dao;
 
-import com.company.bean.User;
+import com.company.entity.User;
+import com.company.entity.UserSkill;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface UserDaoInter {
     boolean updateUser(User u);
 
     boolean removeUser(int id);
+
 }
