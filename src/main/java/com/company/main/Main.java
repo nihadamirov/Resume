@@ -1,12 +1,14 @@
 package com.company.main;
 
-import com.company.dao.UserDaoInter;
+import com.company.dao.CountryDaoInter;
+import com.company.dao.EmploymentHistoryDaoInter;
+import com.company.dao.SkillDaoInter;
 import com.company.dao.UserSkillDaoInter;
-import com.company.daoimpl.UserDaoImpl;
+import com.company.entity.EmploymentHistory;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        UserSkillDaoInter skillDao = Context.instanceSkillDao();
-        System.out.println(skillDao.getAllSkillByUserId(1));
+        CountryDaoInter cd = Context.instanceAllCountry();
+        System.out.println(cd.getAllCountry(1));
     }
 }

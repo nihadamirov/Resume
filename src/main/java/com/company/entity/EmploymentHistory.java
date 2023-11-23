@@ -68,4 +68,16 @@ public class EmploymentHistory {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "EmploymentHistory{" +
+                "id=" + id +
+                ", header='" + header + '\'' +
+                ", beginDate=" + beginDate +
+                ", endDate=" + endDate +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }
