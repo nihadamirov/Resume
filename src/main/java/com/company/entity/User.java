@@ -9,6 +9,7 @@ public class User {
     private String surname;
     private String email;
     private String phone;
+    private String profileDescription;
     private Date birthDate;
     private Country nationality;
     private Country birthPlace;
@@ -21,12 +22,13 @@ public class User {
         this.id = id;
     }
 
-    public User(int id, String name, String surname, String email, String phone, Date birthDate, Country nationality, Country birthPlace) {
+    public User(int id, String name, String surname, String email, String phone, String profileDescription,Date birthDate, Country nationality, Country birthPlace) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
+        this.profileDescription = profileDescription;
         this.birthDate = birthDate;
         this.nationality = nationality;
         this.birthPlace = birthPlace;
@@ -72,6 +74,14 @@ public class User {
         this.phone = phone;
     }
 
+    public String getProfileDescription() {
+        return profileDescription;
+    }
+
+    public void setProfileDescription(String profileDescription) {
+        this.profileDescription = profileDescription;
+    }
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -112,9 +122,11 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", profileDesc='" + profileDescription + '\'' +
                 ", birthDate=" + birthDate +
                 ", nationality=" + nationality +
                 ", birthPlace=" + birthPlace +
+                ", skills=" + skills +
                 '}';
     }
 }

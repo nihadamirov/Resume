@@ -22,6 +22,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         String surname = rs.getString("surname");
         String email = rs.getString("email");
         String phone = rs.getString("phone");
+        String profileDescription = rs.getString("profile_description");
         int nationalityId = rs.getInt("nationality_id");
         int birthplaceId = rs.getInt("birthplace_id");
         String nationalityStr = rs.getString("nationality");
@@ -31,7 +32,7 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
         Country nationality = new Country(nationalityId, null, nationalityStr);
         Country birthplace = new Country(birthplaceId, birthplaceStr, null);
 
-        return new User(id, name, surname, email, phone, birthdate, nationality, birthplace);
+        return new User(id, name, surname, email, phone,profileDescription, birthdate, nationality, birthplace);
     }
 
 
@@ -79,11 +80,12 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
     @Override
     public boolean addUser(User u) {
         try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("insert into user(name,surname,email,phone) values(?,?,?,?)");
+            PreparedStatement stmt = c.prepareStatement("insert into user(name,surname,email,phone,profile_description) values(?,?,?,?,?)");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getEmail());
             stmt.setString(4, u.getPhone());
+            stmt.setString(5,u.getProfileDescription());
             return stmt.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -94,12 +96,13 @@ public class UserDaoImpl extends AbstractDAO implements UserDaoInter {
     @Override
     public boolean updateUser(User u) {
         try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("update user set name=?, surname=?, email=?, phone=? where id=?");
+            PreparedStatement stmt = c.prepareStatement("update user set name=?, surname=?, email=?, phone=?, profile_description?,where id=?");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getEmail());
             stmt.setString(4, u.getPhone());
-            stmt.setInt(5, u.getId());
+            stmt.setString(5,u.getProfileDescription());
+            stmt.setInt(6, u.getId());
             return stmt.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
