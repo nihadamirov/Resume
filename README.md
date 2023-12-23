@@ -8,7 +8,7 @@ This project helps the user create their CV. The user can input their experience
 
 ## Installation
 
-1. Clone the project: `git clone https://github.com/yourusername/resume-project.git`
+1. Clone the project: `git clone https://github.com/nihadamirov/resume-project.git`
 2. Navigate to the project directory: `cd resume-project`
 3. Install the project with Maven: `mvn install`
 
